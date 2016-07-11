@@ -25,7 +25,7 @@ public class Mp4Maker {
         try {
             Path path = Paths.get("c:/temp/" + folderNameInput);
             Files.createDirectories(path);
-            System.out.println("Folder created!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,13 +36,20 @@ public class Mp4Maker {
             fileNameInputer = sc.nextLine();
         } while (fileNameInputer.equalsIgnoreCase("0") == false);
 
+        //
+        for (int i = 0; i < fileNames.size(); i++) {    
+                fileNames.set(i, String.valueOf(i + 1) +"." + fileNames.get(i));
+        }
+
         // Create new empty files to specified path
         for (int i = 0; i < fileNames.size(); i++) {
             try {
+
                 String pathOfDirectory = "c:/temp/" + folderNameInput + "/";
-                File f = new File(pathOfDirectory + fileNames.get(i) + ".mp4");
+                String mp4File = fileNames.get(i) + ".mp4";
+                File f = new File(pathOfDirectory + mp4File);
                 if (f.createNewFile()) {
-                    System.out.println("File created");
+                    System.out.println("File " + mp4File + " created");
                 } else {
                     System.out.println("");
                 }
@@ -50,7 +57,6 @@ public class Mp4Maker {
                 e.printStackTrace();
             }
         }
-
     }
 
     public static void main(String[] args) {
